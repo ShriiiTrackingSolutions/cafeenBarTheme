@@ -4,10 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CafeenBar | The New Standard in Luxury Dining</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+    <!-- Preconnect (important for Google Fonts performance) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Preload Google Fonts stylesheet -->
+<link rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'">
+
+<!-- Fallback for no-JS -->
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&display=swap"
+        rel="stylesheet">
+</noscript>
+<link rel="preload"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'">
+      
+      <link rel="preload"
+      as="image"
+      href="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80"
+      fetchpriority="high">
+
+<noscript>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+</noscript>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
@@ -365,7 +390,7 @@ h2{
         <div class="swiper heroSwiper h-100">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80" alt="Luxury Interior">
+                    <img loading="eager" src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80" alt="Luxury Interior">
                     <div class="hero-content">
                         <h1 class="hero-title" data-aos="fade-up">Defined by <span class="text-gradient-gold">Excellence</span></h1>
                         <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">Where coffee artistry meets culinary sophistication.</p>
@@ -376,7 +401,7 @@ h2{
                     </div>
                 </div>
                 <div class="swiper-slide">
-                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80" alt="Barista Craft">
+                    <img loading="eager" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80" alt="Barista Craft">
                      <div class="hero-content">
                         <h1 class="hero-title">The Art of <span class="text-gradient-gold">Brewing</span></h1>
                         <p class="hero-subtitle">Precision in every pour, passion in every cup.</p>
@@ -395,7 +420,7 @@ h2{
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
                     <div class="about-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1743356629215-abb470447e71?auto=format&fit=crop&q=80" alt="CafeenBar Interior" class="img-fluid about-img">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1743356629215-abb470447e71?auto=format&fit=crop&q=80" alt="CafeenBar Interior" class="img-fluid about-img">
                     </div>
                 </div>
                 <div class="col-lg-6 ps-lg-5 position-relative" data-aos="fade-left">
@@ -488,28 +513,28 @@ h2{
 
             <div class="gallery-grid" data-aos="fade-up" data-aos-delay="200">
                 <a href="https://images.unsplash.com/photo-1545418314-7ce0b9b53901?auto=format&fit=crop&q=80" class="gallery-item" data-fancybox="gallery" data-caption="The Grand Barista Station">
-                    <img src="https://images.unsplash.com/photo-1545418314-7ce0b9b53901?auto=format&fit=crop&q=80" alt="Cafe Bar">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1545418314-7ce0b9b53901?auto=format&fit=crop&q=80" alt="Cafe Bar">
                 </a>
                  <a href="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80" class="gallery-item" data-fancybox="gallery" data-caption="Signature Velvet Latte">
-                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80" alt="Latte Art">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80" alt="Latte Art">
                 </a>
                  <a href="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80" class="gallery-item" data-fancybox="gallery" data-caption="Intimate Seating Corners">
-                    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80" alt="Cozy Corner">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80" alt="Cozy Corner">
                 </a>
                 <a href="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&q=80" class="gallery-item" data-fancybox="gallery" data-caption="Pour-Over Perfection">
-                    <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&q=80" alt="Pour Over">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&q=80" alt="Pour Over">
                 </a>
                  <a href="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80" class="gallery-item" data-fancybox="gallery" data-caption="Freshly Baked Croissants">
-                    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80" alt="Bakery">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80" alt="Bakery">
                 </a>
                  <a href="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&q=80" class="gallery-item" data-fancybox="gallery" data-caption="Evening Ambiance">
-                    <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&q=80" alt="Evening Vibe">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&q=80" alt="Evening Vibe">
                 </a>
                  <a href="https://images.unsplash.com/photo-1515592302748-6c5ea17e2f0e?auto=format&fit=crop&q=80" class="gallery-item" data-fancybox="gallery" data-caption="Evening Ambiance">
-                    <img src="https://images.unsplash.com/photo-1515592302748-6c5ea17e2f0e?auto=format&fit=crop&q=80" alt="Evening Vibe">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1515592302748-6c5ea17e2f0e?auto=format&fit=crop&q=80" alt="Evening Vibe">
                 </a>
                  <a href="https://images.unsplash.com/photo-1629148620712-85a07b24d2aa?auto=format&fit=crop&q=80" class="gallery-item" data-fancybox="gallery" data-caption="Evening Ambiance">
-                    <img src="https://images.unsplash.com/photo-1629148620712-85a07b24d2aa?auto=format&fit=crop&q=80" alt="Evening Vibe">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1629148620712-85a07b24d2aa?auto=format&fit=crop&q=80" alt="Evening Vibe">
                 </a>
             </div>
         </div>
