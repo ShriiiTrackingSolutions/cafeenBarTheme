@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CafeenBar | The New Standard in Luxury Dining</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- CORE VARIABLES & THEME --- */
+        :root {
+            --gold-primary: #d4af37; /* Richer Gold */
+            --gold-accent: #f3e5ab;
+            --bg-darkest: #0a0a0a;
+            --bg-dark: #121212;
+            --bg-surface: #1a1a1a;
+            --text-light: #ffffff;
+            --text-muted: #b3b3b3;
+            --btn-LightB: #2b2b2b;
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-darkest);
+            color: var(--text-light);
+            font-family: var(--font-body);
+            line-height: 1.8;
+            overflow-x: hidden;
+            /* Subtle texture background */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            color: var(--text-light);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        h2 { font-size: 3rem; }
+        
+        .text-gold { color: var(--gold-primary) !important; }
+        .text-gradient-gold {
+            background: linear-gradient(45deg, var(--gold-accent), var(--gold-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        /* Utilities */
+        .section-padding { padding: 120px 0; }
+        .z-1 { z-index: 1; position: relative; }
+        .z-2 { z-index: 2; position: relative; }
+        .overflow-hidden { overflow: hidden; }
+
+        .bannerBtnGroup{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 16px 16px;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-luxury {
+            display: inline-block !important;
+            padding: 15px 40px;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            background-color: #00000060;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border-radius: 0; /* Sharp corners for modern look */
+        }
+        
+        .btn-luxury::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0%; height: 100%;
+            background: var(--gold-primary);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        
+        .btn-luxury:hover { color: var(--bg-darkest); }
+        .btn-luxury:hover::before { width: 100%; }
+        
+        .btn-luxury.filled { background: var(--gold-primary); color: var(--bg-darkest); }
+        .btn-luxury.filled:hover { background: var(--btn-LightB); color: var(--gold-primary); border: 1px solid var(--gold-primary); }
+        .btn-luxury.filled:hover::before { width: 0%; }
+
+
+        /* --- NAVBAR --- */
+        .navbar {
+            padding: 20px 0;
+            background: transparent;
+            transition: all 0.4s ease;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gold-primary);
+        }
+
+        /* .navbar-collapse.bg-dark{
+            background-color: transparent !important;
+        } */
+
+        .navbar-brand { font-family: var(--font-heading); font-size: 2rem; font-weight: 800; letter-spacing: 3px;}
+        
+        .nav-link {
+            font-family: var(--font-body);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            color: var(--text-light) !important;
+            padding: 10px 15px !important;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: ''; position: absolute; bottom: 5px; left: 50%; width: 0; height: 2px;
+            background: var(--gold-primary); transition: all 0.3s ease; transform: translateX(-50%);
+        }
+        .nav-link:hover::after { width: 80%; }
+
+        /* --- HERO SECTION --- */
+        #hero { height: 100vh; position: relative; }
+        .swiper-slide img {
+            width: 100%; height: 100vh; object-fit: cover;
+            filter: brightness(0.5) contrast(1.2);
+            transform: scale(1); transition: transform 8s ease;
+        }
+        .swiper-slide-active img { transform: scale(1.1); }
+        
+        .hero-content {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            text-align: center; width: 80%; z-index: 10;
+        }
+        .hero-title { font-size: 5vw; line-height: 1.1; margin-bottom: 30px; }
+        .hero-subtitle { font-size: 1.5rem; font-weight: 300; margin-bottom: 40px; color: var(--gold-accent); }
+        
+        .scroll-indicator {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            z-index: 10; animation: bounce 2s infinite;
+        }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);} 40% {transform: translateX(-50%) translateY(-20px);} 60% {transform: translateX(-50%) translateY(-10px);} }
+
+
+        /* --- ABOUT & STATS OVERLAP --- */
+        #about { position: relative; background: var(--bg-dark); }
+        .about-img-wrapper {
+            position: relative;
+            margin-top: -100px; /* Overlap hero */
+            z-index: 2;
+        }
+        .about-img {
+            width: 100%; border-radius: 5px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .outline-text {
+            font-family: var(--font-heading); font-size: 8rem; font-weight: 900;
+            color: transparent; -webkit-text-stroke: 2px rgba(212, 175, 55, 0.1);
+            position: absolute; top: -60px; left: -20px; z-index: -1; line-height: 0.8;
+        }
+
+        .stats-bar {
+            background: var(--gold-primary);
+            padding: 40px;
+            /* Glass effect */
+            background: rgba(212, 175, 55, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            margin-top: 50px;
+        }
+
+        /* --- NEW MENU CARDS --- */
+        .menu-card-v2 {
+            position: relative; height: 450px; border-radius: 0; overflow: hidden; group: '';
+        }
+        .menu-card-bg {
+            position: absolute; inset: 0; background-size: cover; background-position: center;
+            transition: transform 0.6s ease; filter: brightness(0.7);
+        }
+        .menu-card-v2:hover .menu-card-bg { transform: scale(1.1); filter: brightness(0.4); }
+        
+        .menu-card-content {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 40px;
+            background: linear-gradient(to top, var(--bg-darkest), transparent);
+        }
+        .menu-card-icon { font-size: 3rem; color: var(--gold-primary); margin-bottom: 20px; opacity: 0.7; }
+        .menu-card-desc {
+            max-height: 0; overflow: hidden; transition: all 0.5s ease; opacity: 0;
+        }
+        .menu-card-v2:hover .menu-card-desc { max-height: 100px; opacity: 1; margin-top: 20px;}
+
+
+        /* --- TESTIMONIALS (Glass) --- */
+        .testimonial-glass {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 50px;
+            text-align: center;
+            position: relative;
+        }
+        .quote-icon { font-size: 5rem; color: var(--gold-primary); opacity: 0.2; position: absolute; top: 20px; left: 20px; }
+
+
+        /* --- FANCYBOX GALLERY STYLES --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 20px;
+        }
+        .gallery-item {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0;
+            aspect-ratio: 1 / 1; /* Perfect squares */
+        }
+
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s ease;
+            filter: grayscale(80%);
+        }
+        .gallery-item::after {
+            content: '\f00e'; /* Fontawesome zoom icon */
+            font-family: "Font Awesome 6 Free"; font-weight: 900;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            font-size: 2rem; color: var(--gold-primary); z-index: 2; transition: all 0.4s ease;
+        }
+        .gallery-item:hover img { transform: scale(1.1); filter: grayscale(0%);}
+        .gallery-item:hover::after { transform: translate(-50%, -50%) scale(1); }
+
+
+        /* --- CONTACT FORM & FOOTER --- */
+        #contact {
+            background: linear-gradient(rgba(10,10,10,0.8), rgba(10,10,10,0.9)), url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80');
+            background-attachment: fixed; background-size: cover;
+        }
+        .glass-form {
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 50px;
+        }
+        .form-control, .form-select {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-light); padding: 15px; border-radius: 0;
+        }
+        .form-control:focus, .form-select option{
+            color: var(--bg-surface);
+            background-color: var(--gold-primary);
+        }
+        .form-control:focus, .form-select:focus {
+            background: rgba(255,255,255,0.1); border-color: var(--gold-primary);
+            box-shadow: none; color: var(--text-light);
+        }
+        .footerLink{
+          text-decoration: none;
+          transition: color all 0.3s ease;
+        }
+        .footerLink:hover{
+          color: var(--gold-primary) !important;
+        }
+        
+        /* Accordion Override */
+        .accordion-item { background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .accordion-button { background: transparent; color: var(--text-light); font-family: var(--font-heading); font-size: 1.2rem; padding: 20px 0; }
+        .accordion-button:not(.collapsed) { background: transparent; color: var(--gold-primary); box-shadow: none; }
+        .accordion-button::after { filter: invert(1); }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .hero-title { font-size: 3.5rem; }
+            .about-img-wrapper { margin-top: 0; }
+            .outline-text { font-size: 5rem; }
+            .gallery-item.wide, .gallery-item.tall { grid-column: span 1; grid-row: span 1; aspect-ratio: 1/1; }
+        }
+
+        @media (max-width: 767.98px) { 
+
+        }
+@media (max-width: 575.98px) { 
+    .btn-luxury {
+            padding: 12px 30px;
+        }
+    .hero-title { font-size: 32px; line-height: normal; margin-bottom: 20px; }
+    .hero-subtitle {
+    font-size: 24px;
+    margin-bottom: 18px;
+    line-height: 30px;
+}
+
+h2{
+    font-size: 24px;
+}
+.h5, h5 {
+    font-size: 18px;
+}
+
+.hero-content {
+    width: 90%;
+}
+
+.glass-form {
+    padding: 12px;
+}
+
+.section-padding {
+    padding:  50px 0;
+}
+ }
+
+
+    </style>
+</head>
+<body id="top">
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#top">
+                <span class="text-gradient-gold">CafeenBar</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars-staggered text-gold fs-3"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end bg-lg-transparent p-4 p-lg-0 mt-3 mt-lg-0" id="navbarNav">
+                <ul class="navbar-nav align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="#about">The Story</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#menu">Creations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#galleryNew">Visuals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Find Us</a></li>
+                    <li class="nav-item ms-lg-4 mt-3 mt-lg-0">
+                        <a href="#reservation" class="btn btn-luxury filled px-4 py-2">Reserve</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="swiper heroSwiper h-100">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80" alt="Luxury Interior">
+                    <div class="hero-content">
+                        <h1 class="hero-title" data-aos="fade-up">Defined by <span class="text-gradient-gold">Excellence</span></h1>
+                        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">Where coffee artistry meets culinary sophistication.</p>
+                        <div data-aos="fade-up" data-aos-delay="400" class="bannerBtnGroup">
+                           <a href="#menu" class="col-auto btn btn-luxury filled ">Explore Menu</a>
+                           <a href="#reservation" class="col-auto btn btn-luxury">Book A Table</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80" alt="Barista Craft">
+                     <div class="hero-content">
+                        <h1 class="hero-title">The Art of <span class="text-gradient-gold">Brewing</span></h1>
+                        <p class="hero-subtitle">Precision in every pour, passion in every cup.</p>
+                        <a href="#menu" class="btn btn-luxury filled">View Selections</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <a href="#about" class="text-gold fs-4"><i class="fa-solid fa-chevron-down"></i></a>
+        </div>
+    </section>
+
+    <section id="about" class="section-padding pb-0">
+        <div class="container z-1">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+                    <div class="about-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1743356629215-abb470447e71?auto=format&fit=crop&q=80" alt="CafeenBar Interior" class="img-fluid about-img">
+                    </div>
+                </div>
+                <div class="col-lg-6 ps-lg-5 position-relative" data-aos="fade-left">
+                    <span class="outline-text">SINCE 2020</span>
+                    <h5 class="text-gold text-uppercase ls-2 mb-3">Our Philosophy</h5>
+                    <h2>More Than Just Coffee. <br>An <span class="text-gradient-gold">Experience.</span></h2>
+                    <p class="lead text-white mt-4">CafeenBar isn't merely a cafe; it is a sanctuary for those who appreciate the finer things.</p>
+                    <p class="text-muted mb-5">We source the rarest beans, employ master roasters, and design our space to envelop you in comfort and luxury. Every detail, from the golden crema on your espresso to the ambient lighting, is curated for your pleasure.</p>
+                    <a href="#menu" class="btn btn-luxury">Discover Our Craft</a>
+                </div>
+            </div>
+
+            <div class="row stats-bar position-relative z-2" data-aos="fade-up" data-aos-offset="100">
+                 <div class="col-md-4 text-center mb-4 mb-md-0">
+                    <h3 class="display-4 text-gold fw-bold"><span class="counter" data-target="35">0</span>+</h3>
+                    <p class="text-uppercase ls-1 mb-0">Signature Blends</p>
+                </div>
+                 <div class="col-md-4 text-center mb-4 mb-md-0">
+                    <h3 class="display-4 text-gold fw-bold"><span class="counter" data-target="150">0</span>k+</h3>
+                    <p class="text-uppercase ls-1 mb-0">Guests Delighted</p>
+                </div>
+                 <div class="col-md-4 text-center">
+                    <h3 class="display-4 text-gold fw-bold"><span class="counter" data-target="98">0</span>%</h3>
+                    <p class="text-uppercase ls-1 mb-0">Sustainability Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="section-padding bg-surface">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h5 class="text-gold text-uppercase ls-2">Curated Selections</h5>
+                <h2>Our Signature <span class="text-gradient-gold">Creations</span></h2>
+            </div>
+            
+            <div class="row g-0">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="menu-card-v2">
+                        <div class="menu-card-bg" style="background-image: url('https://images.unsplash.com/photo-1602531151551-c51e384ff73c?auto=format&fit=crop&q=80');"></div>
+                        <div class="menu-card-content">
+                            <i class="fa-solid fa-mug-hot menu-card-icon"></i>
+                            <h3>The Espresso Bar</h3>
+                            <div class="menu-card-desc">
+                                <p class="text-muted mb-0">Single-origin pour-overs, signature velvet lattes, and robust cortados crafted with precision.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                     <div class="menu-card-v2">
+                        <div class="menu-card-bg" style="background-image: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80');"></div>
+                        <div class="menu-card-content">
+                            <i class="fa-solid fa-stroopwafel menu-card-icon"></i>
+                             <h3>Gourmet Patisserie</h3>
+                             <div class="menu-card-desc">
+                                 <p class="text-muted mb-0">Artisanal pastries, sourdough toasts, and decadent desserts baked fresh daily.</p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                     <div class="menu-card-v2">
+                        <div class="menu-card-bg" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80');"></div>
+                        <div class="menu-card-content">
+                            <i class="fa-solid fa-martini-glass-citrus menu-card-icon"></i>
+                             <h3>Evening Elixirs</h3>
+                             <div class="menu-card-desc">
+                                 <p class="text-muted mb-0">Transform your evening with our zero-proof botanical cocktails and premium lounge vibes.</p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="galleryNew" class="section-padding position-relative z-1">
+        <div class="container">
+             <div class="row align-items-end mb-5" data-aos="fade-up">
+                <div class="col-lg-6">
+                     <h5 class="text-gold text-uppercase ls-2">The Visual Journey</h5>
+                    <h2>Atmosphere & <span class="text-gradient-gold">Details</span></h2>
+                </div>
+                <div class="col-lg-6 text-lg-end">
+                    <p class="text-muted mb-0">Click any image to immerse yourself in the CafeenBar experience.</p>
+                </div>
+            </div>
+
+            <div class="gallery-grid" data-aos="fade-up" data-aos-delay="200">
+                <a href="https://images.unsplash.com/photo-1545418314-7ce0b9b53901?auto=format&fit=crop&q=80" class="gallery-item" data-fancybox="gallery" data-caption="The Grand Barista Station">
+                    <img src="https://images.unsplash.com/photo-1545418314-7ce0b9b53901?auto=format&fit=crop&q=80" alt="Cafe Bar">
+                </a>
+                 <a href="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80" class="gallery-item" data-fancybox="gallery" data-caption="Signature Velvet Latte">
+                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80" alt="Latte Art">
+                </a>
+                 <a href="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80" class="gallery-item" data-fancybox="gallery" data-caption="Intimate Seating Corners">
+                    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80" alt="Cozy Corner">
+                </a>
+                <a href="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&q=80" class="gallery-item" data-fancybox="gallery" data-caption="Pour-Over Perfection">
+                    <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&q=80" alt="Pour Over">
+                </a>
+                 <a href="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80" class="gallery-item" data-fancybox="gallery" data-caption="Freshly Baked Croissants">
+                    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80" alt="Bakery">
+                </a>
+                 <a href="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&q=80" class="gallery-item" data-fancybox="gallery" data-caption="Evening Ambiance">
+                    <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&q=80" alt="Evening Vibe">
+                </a>
+                 <a href="https://images.unsplash.com/photo-1515592302748-6c5ea17e2f0e?auto=format&fit=crop&q=80" class="gallery-item" data-fancybox="gallery" data-caption="Evening Ambiance">
+                    <img src="https://images.unsplash.com/photo-1515592302748-6c5ea17e2f0e?auto=format&fit=crop&q=80" alt="Evening Vibe">
+                </a>
+                 <a href="https://images.unsplash.com/photo-1629148620712-85a07b24d2aa?auto=format&fit=crop&q=80" class="gallery-item" data-fancybox="gallery" data-caption="Evening Ambiance">
+                    <img src="https://images.unsplash.com/photo-1629148620712-85a07b24d2aa?auto=format&fit=crop&q=80" alt="Evening Vibe">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="reservation" class="section-padding" style="background: linear-gradient(to bottom, var(--bg-darkest), var(--bg-surface));">
+         <div class="container">
+            <div class="row">
+                <div class="col-lg-5 mb-5 mb-lg-0" data-aos="fade-right">
+                    <h5 class="text-gold text-uppercase ls-2">Need to Know</h5>
+                    <h2 class="mb-5">Frequently Asked <span class="text-gradient-gold">Questions</span></h2>
+                    
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">Do you require reservations?</button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-muted">Walk-ins are welcome, but reservations are highly recommended for evening service and weekends to guarantee seating.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">Are vegan options available?</button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-muted">Yes, we have an extensive selection of plant-based milks and vegan pastry options available daily.</div>
+                            </div>
+                        </div>
+                         <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">Do you offer valet parking?</button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-muted">Complimentary valet parking is available for all our dine-in guests during operating hours.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 offset-lg-1" data-aos="fade-left">
+                    <div class="glass-form">
+                        <h3 class="mb-4">Secure Your Table</h3>
+                        <p class="text-muted mb-4">Book instantly via WhatsApp. We will confirm availability shortly.</p>
+                         <form id="whatsappForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" id="wName" class="form-control" placeholder="Your Name" required>
+                                </div>
+                                 <div class="col-md-6 mb-3">
+                                    <input type="tel" id="wPhone" class="form-control" placeholder="Phone Number" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <input type="date" id="wDate" class="form-control" required>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <select id="wGuests" class="form-select">
+                                        <option value="" selected disabled>Guests</option>
+                                        <option value="2">2 People</option>
+                                        <option value="4">4 People</option>
+                                        <option value="6+">6+ People</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <textarea id="wMessage" class="form-control" rows="3" placeholder="Special Requests (e.g., Anniversary, Quiet Corner)"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-luxury filled w-100 py-3">
+                                <i class="fa-brands fa-whatsapp me-2"></i> Request via WhatsApp
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding pb-0">
+        <div class="container" data-aos="fade-up">
+            <div class="row text-center text-lg-start">
+                <div class="col-lg-4 mb-5">
+                    <h3 class="text-gold mb-4">CafeenBar</h3>
+                    <p class="text-muted pe-lg-5">Redefining the coffee house experience through luxury, comfort, and unparalleled quality. Treat yourself to the best.</p>
+                </div>
+                 <div class="col-lg-4 mb-5">
+                    <h4 class="mb-4">Visit Us</h4>
+                    <p class="text-muted fs-5 mb-1"><a target="_blank" class="footerLink text-muted" href="#">123 Velvet Lane, Gourmet District</a></p>
+                    <h4 class="mb-4 mt-5">Hours</h4>
+                    <p class="text-muted mb-0">Mon - Sun: 10:00 AM - 11:00 PM</p>
+                </div>
+                 <div class="col-lg-4 mb-5">
+                    <h4 class="mb-4">Contact</h4>
+                     <p class="text-gold fs-4 mb-1"><a target="_blank" class="footerLink text-muted" href="tel:+916354710794">+91 63547 10794</a></p>
+                     <p class="text-muted"><a target="_blank" class="footerLink text-muted" href="mailto:hello@cafeenbarbrew.com">hello@cafeenbarbrew.com</a></p>
+                     <div class="mt-5">
+                         <a target="_blank" href="https://www.instagram.com/" class="text-muted me-4 fs-4 footerLink"><i class="fa-brands fa-instagram"></i></a>
+                         <a target="_blank" href="https://www.facebook.com/" class="text-muted me-4 fs-4 footerLink"><i class="fa-brands fa-facebook"></i></a>
+                         <a target="_blank" href="https://twitter.com/" class="text-muted fs-4 footerLink"><i class="fa-brands fa-x-twitter"></i></a>
+                     </div>
+                </div>
+            </div>
+            <div class="row mt-5 py-4 border-top border-dark-subtle text-center">
+                <div class="col-12 text-muted small">
+                    © 2026 CafeenBar. All rights reserved. <a target="_blank" class="footerLink text-muted" href="https://shriiitrackingsolution.in/">Shriii Tracking Solution</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // 1. INITIALIZE AOS (Animations)
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // 2. NAVBAR SCROLL EFFECT
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // 3. SWIPER HERO SLIDER
+        const heroSwiper = new Swiper('.heroSwiper', {
+            loop: true,
+            speed: 1000,
+            effect: 'fade',
+            autoplay: { delay: 6000, disableOnInteraction: false },
+        });
+
+        // 4. INITIALIZE FANCYBOX GALLERY
+        // Fancybox automatically binds to elements with data-fancybox attribute.
+        // We just need to set optional defaults if desired.
+        Fancybox.bind("[data-fancybox]", {
+            // Custom options here
+            Thumbs: { autoStart: false },
+            Toolbar: {
+                display: {
+                left: ["infobar"],
+                middle: [],
+                right: ["slideshow", "thumbs", "close"],
+                },
+            },
+        });
+
+        // 5. STATS COUNTER ANIMATION
+        const statsSection = document.querySelector('.stats-bar');
+        const counters = document.querySelectorAll('.counter');
+        let started = false;
+
+        const startCount = (el) => {
+            const target = +el.getAttribute('data-target');
+            let count = 0;
+            const increment = target / 50; // Faster counting
+            const timer = setInterval(() => {
+                count += increment;
+                if(count >= target) {
+                    el.innerText = target;
+                    clearInterval(timer);
+                } else {
+                    el.innerText = Math.ceil(count);
+                }
+            }, 30);
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            if(entries[0].isIntersecting && !started) {
+                counters.forEach(num => startCount(num));
+                started = true;
+            }
+        }, { threshold: 0.5 });
+
+        observer.observe(statsSection);
+
+        // 6. WHATSAPP FORM LOGIC (Unchanged functionality, new design)
+        document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('wName').value;
+            const phone = document.getElementById('wPhone').value;
+            const date = document.getElementById('wDate').value;
+            const guests = document.getElementById('wGuests').value;
+            const message = document.getElementById('wMessage').value;
+            
+            const phoneNumber = "919876543210"; // Replace with actual number
+            
+            let text = `*RESERVATION REQUEST*%0A------------------%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Date:* ${date}%0A*Guests:* ${guests}`;
+            if(message) text += `%0A*Note:* ${message}`;
+            
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            const url = isMobile 
+                ? `https://wa.me/${phoneNumber}?text=${text}`
+                : `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${text}`;
+            
+            window.open(url, '_blank');
+        });
+    </script>
+</body>
+</html>
